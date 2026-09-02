@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white font-body text-ink antialiased;
+}
+
+::selection {
+  background: #e4002b;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #e4002b;
+  outline-offset: 2px;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .label {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand;
+  }
+  .label::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: #e4002b;
+    flex-shrink: 0;
+  }
+
+  .h-display {
+    @apply font-display uppercase;
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  .h-section {
+    @apply mt-3 font-display text-3xl uppercase sm:text-4xl;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  /* ─── Service card ─── */
+  .card {
+    @apply relative overflow-hidden bg-white p-7;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 3px solid #e4002b;
+    transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(228, 0, 43, 0.04) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 380ms ease;
+    pointer-events: none;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.14);
+  }
+  .card:hover::after {
+    opacity: 1;
+  }
+
+  /* ─── Step card ─── */
+  .step-card {
+    @apply relative bg-white p-8;
+    border-top: 3px solid #e4002b;
+    transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.12);
+  }
+
+  /* ─── Buttons ─── */
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2 px-7 text-sm font-semibold uppercase tracking-wide;
+    transition: background 200ms ease, color 200ms ease,
+                box-shadow 200ms ease, transform 120ms ease,
+                border-color 200ms ease;
+  }
+  .btn:active {
+    transform: scale(0.96);
+  }
+
+  .btn-primary {
+    @apply bg-brand text-white;
+  }
+  .btn-primary:hover {
+    background: #c00024;
+    box-shadow: 0 6px 20px -4px rgba(228, 0, 43, 0.45);
+  }
+
+  .btn-ghost {
+    @apply border border-black/15 bg-white text-ink;
+  }
+  .btn-ghost:hover {
+    @apply border-brand text-brand;
+    box-shadow: 0 4px 12px -4px rgba(228, 0, 43, 0.2);
+  }
+
+  /* ─── Reveal (scroll-driven entrance) ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    filter: blur(4px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* ─── No JS fallback ─── */
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ─── Keyframes ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0);   }
+}
+
+@keyframes counterSlide {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.9); opacity: 0.7; }
+  70%  { transform: scale(1.4); opacity: 0;   }
+  100% { transform: scale(0.9); opacity: 0;   }
+}
