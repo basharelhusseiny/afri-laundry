@@ -231,7 +231,7 @@ export default function Page() {
 
                   <div className="mt-6 flex items-center justify-between pt-4 border-t border-black/5 text-xs font-semibold text-muted group-hover:text-ink transition-colors">
                     <span>Guaranteed by Afri General</span>
-                    <span className="text-brand">&check;</span>
+                 
                   </div>
                 </article>
               </Reveal>
